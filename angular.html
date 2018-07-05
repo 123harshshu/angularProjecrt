@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Task</title>
+    <style>
+      body{text-align: -webkit-center;}
+    table{text-align:center;}
+    th{color:white;background: brown}
+    td{color:white;background:rgb(169, 169, 169);}
+    
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+    <div ng-controller="myCtr">
+        <h2>Users Data</h2>
+        <br>
+        <table border= "1">
+            <tr>
+                <th>Name</th>
+                <th>Users</th>
+                <th>Remove</th>
+            </tr>
+            <tr ng-repeat="network in networks">
+                <td>{{network.user}}</td>
+                <td>{{network.age}}</td>
+                <td ng-click="removeNetwork(network)"><i class="fa fa-trash" aria-hidden="true"></i></td>
+            </tr>
+        </table>
+
+        
+    
+
+        
+
+    </div>
+<script>
+  var app= angular.module("myApp", []);
+
+app.controller("myCtr", function($scope, $http){
+    $http.get("data.json").then(function(item){
+        $scope.networks=item.data;
+    })
+
+    $scope.removeNetwork=function(network){
+        var removedNetwork=$scope.networks.indexOf(network);
+        $scope.networks.splice(removedNetwork,1);
+    }
+
+    
+})
+</script>
+    
+  
+    <script src="app.js"></script>
+    
+</body>
+</html>
